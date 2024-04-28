@@ -24,7 +24,7 @@ import {
 } from "./pages";
 import { action as registerAction } from "./pages/RegisterPage";
 import { action1 as addUserAction } from "./pages/Database";
-import { action as loginAction, loader as getAuth } from "./pages/LoginPage";
+import { action as loginAction} from "./pages/LoginPage";
 import { action as deleteUserAction } from "./pages/deleteUser";
 import { action as deleteProjectAction } from "./pages/deleteProjectPage";
 import { action as updateProjectStatusAction } from "./pages/updateProjectStatusPage";
@@ -62,7 +62,7 @@ const Router = createBrowserRouter(
               <LoginPage />
             </Suspense>
           ),
-          loader: getAuth,
+          // loader: getAuth,
           action: loginAction,
         },
         {
