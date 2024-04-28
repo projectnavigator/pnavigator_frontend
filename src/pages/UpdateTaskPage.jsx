@@ -10,7 +10,6 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { useEffect } from "react";
 
-
 export const loader = async ({ params }) => {
   try {
     const [projectResponse, usersResponse, tasksResponse] = await Promise.all([
@@ -50,48 +49,63 @@ const UpdateTaskPage = () => {
   const project = projects.find((project) =>
     tasks1.project.includes(project._id)
   );
-  const userOptions = users
-    .filter((user) => !user.isProjectManager)
-    .map((user) => ({
-      value: user._id,
-      label: `${user.firstName} ${user.lastName}`,
-    }));
-  const usersAssigned = userOptions.filter((user) =>
+
+  const [userOptions, setUserOptions] = useState();
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useEffect(() => {
+    if (users) {
+      const setusers = users
+        .filter((user) => !user.isProjectManager)
+        .map((user) => ({
+          value: user._id,
+          label: `${user.firstName} ${user.lastName}`,
+        }));
+      setUserOptions(setusers);
+      setSelectedOptions(setusers);
+    }
+  }, [users]);
+  const usersAssigned = userOptions?.filter((user) =>
     tasks1.assignedUser.includes(user.value)
   );
-  const [selectedOptions, setSelectedOptions] = useState([]);
   // useEffect (() => {
   //   setSelectedOptions(usersAssigned);
   // })
   const handleChange = (newOptions) => {
     setSelectedOptions(newOptions);
   };
-
-
-  console.log(selectedOptions.map(item => item.value).toString());
+  // console.log(selectedOptions.map((item) => item.value).toString());
   return (
     <Wrapper>
       <Form method="post" className="form">
         <h4 className="form-title">Update Task</h4>
         <div className="form-center">
-          <FormRow type="text" name="task Name" defaultValue={tasks1.taskName} />
-            <div>
-              <label style={{ marginBottom: "10px" }}>Team Members</label>
-              <Select
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                defaultValue={usersAssigned}
-                isMulti
-                onChange={handleChange}
-                options={userOptions}
-              />
-              <input
-                type="text"
-                hidden
-                name="assignedUser"
-                defaultValue={selectedOptions.map(item => item.value)}
-              />
-            </div>
+          <FormRow
+            type="text"
+            name="task Name"
+            defaultValue={tasks1.taskName}
+          />
+          <div>
+            <label style={{ marginBottom: "10px" }}>Team Members</label>
+            {userOptions && usersAssigned && (
+              <>
+                <Select
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  defaultValue={usersAssigned}
+                  isMulti
+                  onChange={handleChange}
+                  options={userOptions}
+                />
+                <input
+                  type="text"
+                  hidden
+                  name="assignedUser"
+                  defaultValue={selectedOptions.map((item) => item.value)}
+                />
+              </>
+            )}
+          </div>
           <FormRowSelect
             name="taskStatus"
             labelText="task status"

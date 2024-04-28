@@ -9,6 +9,7 @@ const FormRowSelect = ({ name, labelText, list, defaultValue = "" }) => {
         id={name}
         className="form-select"
         defaultValue={defaultValue}
+        onChange={(e) => console.log(e.target.value)}
       >
         {list.map((itemValue) => {
           return (
