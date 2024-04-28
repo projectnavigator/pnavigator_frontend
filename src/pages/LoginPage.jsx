@@ -32,7 +32,7 @@ export const action = async ({ request }) => {
 };
 
 const LoginPage = () => {
-  const {user} = useLoaderData();
+  const user = useLoaderData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const [showPassword, setShowPassword] = useState(false);
