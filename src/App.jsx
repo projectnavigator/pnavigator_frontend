@@ -1,3 +1,4 @@
+import { Suspense, Lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   HomeLayout,
@@ -23,7 +24,7 @@ import {
 } from "./pages";
 import { action as registerAction } from "./pages/RegisterPage";
 import { action1 as addUserAction } from "./pages/Database";
-import { action as loginAction } from "./pages/LoginPage";
+import { action as loginAction, loader as getAuth } from "./pages/LoginPage";
 import { action as deleteUserAction } from "./pages/deleteUser";
 import { action as deleteProjectAction } from "./pages/deleteProjectPage";
 import { action as updateProjectStatusAction } from "./pages/updateProjectStatusPage";
@@ -39,46 +40,84 @@ import { action as addTask } from "./pages/Dash";
 import { action as deleteTaskPage } from "./pages/deleteTaskPage";
 import { loader as UpdateProjectPageLoader } from "./pages/updateProjectPage";
 import { action as updateProjectPageAction } from "./pages/updateProjectPage";
-import { loader as updateTaskPageLoader } from "./pages/updateTaskPage";
-import { action as updateTaskPageAction } from "./pages/updateTaskPage";
+import { loader as updateTaskPageLoader } from "./pages/UpdateTaskPage";
+import { action as updateTaskPageAction } from "./pages/UpdateTaskPage";
+import Loading from "./components/Loading";
 
-const Router = createBrowserRouter ([
+const Router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeLayout />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <HomeLayout />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <LoginPage />, action: loginAction },
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <LoginPage />
+          </Suspense>
+        ),
+        loader: getAuth,
+        action: loginAction,
+      },
       {
         path: "register",
-        element: <RegisterPage />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <RegisterPage />
+          </Suspense>
+        ),
         action: registerAction,
       },
       {
         path: "dashboard",
-        element: <DashboardPage />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <DashboardPage />
+          </Suspense>
+        ),
         loader: dashboardLoader,
         children: [
           {
             index: true,
-            element: <Dash />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <Dash />
+              </Suspense>
+            ),
             loader: taskLoader,
             action: addTask,
           },
           {
             path: "dash",
-            element: <Home />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <Home />
+              </Suspense>
+            ),
             loader: homeLoader,
             action: addProject,
           },
           {
             path: "progress-report",
-            element: <ProgressReport />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <ProgressReport />
+              </Suspense>
+            ),
             loader: statsLoader,
           },
           {
             path: "database",
-            element: <Database />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <Database />
+              </Suspense>
+            ),
             action: addUserAction,
             loader: databaseLoader,
           },
@@ -88,13 +127,21 @@ const Router = createBrowserRouter ([
           { path: "delete-task/:id", action: deleteTaskPage },
           {
             path: "update-project/:id",
-            element: <UpdateProjectPage />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <UpdateProjectPage />
+              </Suspense>
+            ),
             loader: UpdateProjectPageLoader,
             action: updateProjectPageAction,
           },
           {
             path: "update-task/:id",
-            element: <UpdateTaskPage />,
+            element: (
+              <Suspense fallback={<Loading />}>
+                <UpdateTaskPage />
+              </Suspense>
+            ),
             loader: updateTaskPageLoader,
             action: updateTaskPageAction,
           },

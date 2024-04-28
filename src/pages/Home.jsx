@@ -51,7 +51,6 @@ export const loader = async () => {
     const { data: users } = usersResponse;
     const { data: tasks1 } = tasksResponse;
     const { data: currentuser } = currentuserResponse;
-
     return { projects, users, tasks1, currentuser };
   } catch (error) {
     toast.error(error?.response?.data?.msg);

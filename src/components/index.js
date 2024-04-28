@@ -1,15 +1,36 @@
-export {default as AdminNav} from './AdminNav';
-export {default as Sidebar} from './Sidebar';
-export {default as Navbar} from './Navbar';
-export {default as FormRow} from './FormRow';
-export {default as FormRowSelect} from './FormRowSelect';
-export {default as UserContainer} from './userContainer';
-export {default as ProjectContainer} from './ProjectContainer';
-export {default as AreaChart} from './AreaChart';
-export {default as BarChart} from './BarChart';
-export {default as ChartsContainer} from './ChartsContainer';
-export {default as PieChart} from './PieChart';
-export {default as CompletionStatusContainer} from './CompletionStatusContainer';
-export {default as StatusStatsContainer} from './StatusStatsContainer';
+import { lazy } from "react";
+
+const AdminNav = lazy(() => import("./AdminNav"));
+const Sidebar = lazy(() => import("./Sidebar"));
+const Navbar = lazy(() => import("./Navbar"));
+const FormRow = lazy(() => import("./FormRow"));
+const FormRowSelect = lazy(() => import("./FormRowSelect"));
+const UserContainer = lazy(() => import("./UserContainer"));
+const ProjectContainer = lazy(() => import("./ProjectContainer"));
+const AreaChart = lazy(() => import("./AreaChart"));
+const BarChart = lazy(() => import("./BarChart"));
+const ChartsContainer = lazy(() => import("./ChartsContainer"));
+const PieChart = lazy(() => import("./PieChart"));
+const CompletionStatusContainer = lazy(() =>
+  import("./CompletionStatusContainer")
+);
+const StatusStatsContainer = lazy(() => import("./StatusStatsContainer"));
 // export {default as PMProjectContainer} from './PMProjectContainer';
-export {default as TaskContainer} from './TaskContainer';
+const TaskContainer = lazy(() => import("./TaskContainer"));
+
+export {
+  AdminNav,
+  Sidebar,
+  Navbar,
+  FormRow,
+  FormRowSelect,
+  UserContainer,
+  ProjectContainer,
+  AreaChart,
+  BarChart,
+  ChartsContainer,
+  PieChart,
+  CompletionStatusContainer,
+  StatusStatsContainer,
+  TaskContainer,
+};

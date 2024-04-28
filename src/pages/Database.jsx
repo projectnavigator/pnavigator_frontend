@@ -37,7 +37,6 @@ const AllUserContext = createContext()
 export const action1 = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
   try {
     await customFetch.post("/auth/register", data);
     toast.success("Registered Successfully");

@@ -1,21 +1,46 @@
-export { default as addActivityPage } from "./addActivityPage";
-export { default as addProjectPage } from "./addProjectPage";
-export { default as addTaskPage } from "./addTaskPage";
-export { default as AdminPage } from "./AdminPage";
-export { default as allProjectPage } from "./allProjectPage";
-export { default as allTaskPage } from "./allTaskPage";
-export { default as HomeLayout } from "./HomeLayout";
-export { default as LandingPage } from "./LandingPage";
-export { default as LoginPage } from "./LoginPage";
-export { default as ProfilePage } from "./ProfilePage";
-export { default as RegisterPage } from "./RegisterPage";
-export { default as StatusPage } from "./StatusPage";
-export { default as UpdateProjectPage } from "./updateProjectPage";
-export { default as UpdateTaskPage } from "./updateTaskPage";
-export { default as DashboardPage } from "./DashboardPage";
-export { default as ErrorPage } from "./ErrorPage";
-export { default as Dash } from "./Dash";
-export { default as Home } from "./Home";
-export { default as ProgressReport } from "./ProgressReport";
-export { default as Database } from "./Database";
+import { lazy } from "react";
+
+const addActivityPage = lazy(() => import("./addActivityPage"));
+const addProjectPage = lazy(() => import("./addProjectPage"));
+const addTaskPage = lazy(() => import("./addTaskPage"));
+const AdminPage = lazy(() => import("./AdminPage"));
+const allProjectPage = lazy(() => import("./allProjectPage"));
+const allTaskPage = lazy(() => import("./allTaskPage"));
+const HomeLayout = lazy(() => import("./HomeLayout"));
+const LandingPage = lazy(() => import("./LandingPage"));
+const LoginPage = lazy(() => import("./LoginPage"));
+const ProfilePage = lazy(() => import("./ProfilePage"));
+const RegisterPage = lazy(() => import("./RegisterPage"));
+const StatusPage = lazy(() => import("./StatusPage"));
+const UpdateProjectPage = lazy(() => import("./updateProjectPage"));
+const UpdateTaskPage = lazy(() => import("./UpdateTaskPage"));
+const DashboardPage = lazy(() => import("./DashboardPage"));
+const ErrorPage = lazy(() => import("./ErrorPage"));
+const Dash = lazy(() => import("./Dash"));
+const Home = lazy(() => import("./Home"));
+const ProgressReport = lazy(() => import("./ProgressReport"));
+const Database = lazy(() => import("./Database"));
 // export {default as PMHome} from './PMHome';
+
+export {
+  addActivityPage,
+  addProjectPage,
+  addTaskPage,
+  AdminPage,
+  allProjectPage,
+  allTaskPage,
+  HomeLayout,
+  LandingPage,
+  LoginPage,
+  ProfilePage,
+  RegisterPage,
+  StatusPage,
+  UpdateProjectPage,
+  UpdateTaskPage,
+  DashboardPage,
+  ErrorPage,
+  Dash,
+  Home,
+  ProgressReport,
+  Database,
+};

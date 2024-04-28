@@ -5,7 +5,6 @@ import { createContext, useContext, useState } from "react";
 import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
 
-
 export const loader = async () => {
   try {
     const { data } = await customFetch.get("/user/current-user");
@@ -19,7 +18,7 @@ const DashboardContext = createContext();
 
 const DashboardPage = () => {
   const { user } = useLoaderData();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -32,12 +31,12 @@ const DashboardPage = () => {
   };
 
   const logoutUser = async () => {
-    navigate('/');
-    await customFetch.get('/auth/logout');
-    toast.success('Logging out...');
+    navigate("/");
+    await customFetch.get("/auth/logout");
+    toast.success("Logging out...");
   };
 
-  return (
+  return user && (
     <DashboardContext.Provider
       value={{
         user,
