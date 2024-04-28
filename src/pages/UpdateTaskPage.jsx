@@ -41,6 +41,8 @@ export const action = async ({ request, params }) => {
   }
 };
 
+
+
 const UpdateTaskPage = () => {
   const { projects, users, tasks1 } = useLoaderData();
   const navigation = useNavigation();
@@ -49,10 +51,10 @@ const UpdateTaskPage = () => {
   const project = projects.find((project) =>
     tasks1.project.includes(project._id)
   );
-
+  console.log(tasks1);
   const [userOptions, setUserOptions] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+console.log(tasks1);
   useEffect(() => {
     if (users) {
       const setusers = users

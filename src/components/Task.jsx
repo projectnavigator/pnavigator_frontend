@@ -30,7 +30,6 @@ const Task = ({ _id, taskName, project, assignedUser, priority }) => {
     return stars.map((star, index) => <span key={index}>{star}</span>);
   };
 
-  console.log(taskName);
 
   return (
     <Wrapper>

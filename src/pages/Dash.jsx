@@ -1,11 +1,11 @@
 import { FormRow, FormRowSelect } from "../components";
 import { Form, useNavigation, redirect, useLoaderData } from "react-router-dom";
-
+import { useSubmit, Link } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import { TaskContainer } from "../components";
 import { useContext, createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { TASK_STATUS, TASK_PRIORITY } from "../utils/constants";
+import { TASK_STATUS, TASK_PRIORITY, TASK_SORT_BY } from "../utils/constants";
 import Wrapper from "../assets/wrappers/Task";
 import React from "react";
 import Select from "react-select";
@@ -37,10 +37,15 @@ export const action = async ({ request }) => {
   }
 };
 
-export const loader = async () => {
+export const loader = async ({request}) => {
+  console.log(request.url);
+  const params = Object.fromEntries([...new URL(request.url).searchParams.entries(),]);
+  console.log(params);
+
+  // const customFetch = buildFetch(request);
   try {
     const [taskResponse, userResponse, projectResponse,currentuserResponse] = await Promise.all([
-      customFetch.get("/task"),
+      customFetch.get("/task", {params}),
       customFetch.get("/user/all-user"),
       customFetch.get("/project"),
       customFetch.get("/user/current-user"),
@@ -220,41 +225,71 @@ const Dash = () => {
         {/* another button */}
 
         <button
-          type="button "
-          className="btn"
-          data-bs-toggle="modal"
-          data-bs-target="#searchUser"
-        >
-          Search Engine
-        </button>
+            type="button "
+            className="btn"
+            data-bs-toggle="modal"
+            data-bs-target="#searchUser"
+          >
+            Search Engine
+          </button>
 
-        <div
-          className="modal fade"
-          id="searchUser"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex="-1"
-          aria-labelledby="searchUserLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="searchUser">
-                  Search User
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+          <div
+            className="modal fade"
+            id="searchUser"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby="searchUserLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="searchUser">
+                    Search User
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <Form method="get">
+                    <div className="form-center">
+                      <FormRow type='search' name='search' defaultValue='a' />
+                      <FormRowSelect labelText='task status' name='taskStatus' list={['all', ...Object.values(TASK_STATUS)]} defaultValue="='all" />
+                      <FormRowSelect labelText='priority' name='priority' list={['all', ...Object.values(TASK_PRIORITY)]} defaultValue="='all" />
+                      <FormRowSelect name='sort' defaultValue="newest" list={[...Object.values(TASK_SORT_BY)]} />
+
+                      {/* TEMPORARY */}
+
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          className="btn form-btn"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? 'submitting' : 'submit'}
+                        </button>
+                        <Link to='/dashboard' className="btn form-btn delete-btn">Reset Search Values</Link>
+                      </div>
+                    </div>
+                  </Form>
+                </div>
               </div>
-              <div className="modal-body"></div>
             </div>
+
           </div>
         </div>
-      </div>
         <AllTaskContext.Provider value={{ tasks, users, projects, currentuser }}>
           <TaskContainer />
         </AllTaskContext.Provider>

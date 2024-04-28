@@ -70,8 +70,8 @@ const Project = ({
 
   const projectOwner = users.find((user) => createdBy.includes(user._id));
 
-  const tasksLength = tasks1.length; // Add null check here
-  const taskDone = tasks1.filter(
+  const tasksLength = tasks.length; // Add null check here
+  const taskDone = tasks.filter(
     (task) =>
       task.taskStatus !== "for_approval" && task.taskStatus !== "in_progress"
   ).length;

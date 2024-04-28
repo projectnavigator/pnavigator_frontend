@@ -4,7 +4,7 @@ import Wrapper from '../assets/wrappers/TaskContainer';
 
 const TaskContainer = () => {
   const { tasks } = useAllTaskContext();
-  if (tasks.length === 0) {
+  if (tasks.task.length === 0) {
     return (
       <Wrapper>
         <h2>No Tasks to display...</h2>
@@ -14,8 +14,8 @@ const TaskContainer = () => {
   return (
     <Wrapper>
       <div className="task">
-        {tasks.map((task) => {
-          return <Task key={task._id} {...task} />;
+        {tasks.task.map((t) => {
+          return <Task key={t._id} {...t} />;
         })}
       </div>
     </Wrapper>

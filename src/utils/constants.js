@@ -23,3 +23,12 @@ export const PROJECT_COMPLETION = {
       MID : 2,
       LOW : 3,
   }
+
+  export const TASK_SORT_BY ={
+    NEWEST_FIRST : 'newest',
+    OLDEST_FIRST : 'oldest',
+    ASCENDING : 'a-z',
+    DESCENDING: 'z-a'
+  }
+
+  
