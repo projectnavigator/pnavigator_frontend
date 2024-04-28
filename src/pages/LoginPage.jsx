@@ -6,16 +6,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { Navigate, useLoaderData } from "react-router-dom/dist";
 
-export const loader = async ({ request }) => {
-  try {
-    const {
-      data: { user },
-    } = await customFetch.get("/auth/current-user");
-    return user;
-  } catch (error) {
-    return null;
-  }
-};
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -32,12 +22,11 @@ export const action = async ({ request }) => {
 };
 
 const LoginPage = () => {
-  const user = useLoaderData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const [showPassword, setShowPassword] = useState(false);
 
-  return !user ? (
+  return(
     <Wrapper>
       <div className="login template d-flex justify-content-center align-items-center vh-100 background1 ">
         <div className="form_container p-5 rounded bg-white shadow-lg">
@@ -89,9 +78,7 @@ const LoginPage = () => {
         </div>
       </div>
     </Wrapper>
-  ) : (
-    <Navigate to={"/"} />
-  );
+  ) 
 };
 
 const Wrapper = styled.div`
