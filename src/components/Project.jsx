@@ -126,7 +126,7 @@ const Project = ({
           actualEnd: new Date(),
           projectStatus: "done",
         })
-        .then((response) => response.data)
+        .then((response) => response.status === 200 && window.location.reload())
         .catch((error) => console.error(error));
     } else if (value === "cancelled") {
       customFetch
@@ -135,7 +135,7 @@ const Project = ({
           actualEnd: "",
           projectStatus: "cancelled",
         })
-        .then((response) => response.data)
+        .then((response) => response.status === 200 && window.location.reload())
         .catch((error) => console.error(error));
     } else {
       customFetch
@@ -143,10 +143,9 @@ const Project = ({
           projectCompletion: value,
           actualEnd: "",
         })
-        .then((response) => response.data)
+        .then((response) => response.status === 200 && window.location.reload())
         .catch((error) => console.error(error));
     }
-    window.location.reload();
   };
 
   console.log(projectStatus);
