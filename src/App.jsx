@@ -44,143 +44,148 @@ import { loader as updateTaskPageLoader } from "./pages/UpdateTaskPage";
 import { action as updateTaskPageAction } from "./pages/UpdateTaskPage";
 import Loading from "./components/Loading";
 
-const Router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <Suspense fallback={<Loading />}>
-        <HomeLayout />
-      </Suspense>
-    ),
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={<Loading />}>
-            <LoginPage />
-          </Suspense>
-        ),
-        loader: getAuth,
-        action: loginAction,
-      },
-      {
-        path: "register",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <RegisterPage />
-          </Suspense>
-        ),
-        action: registerAction,
-      },
-      {
-        path: "dashboard",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <DashboardPage />
-          </Suspense>
-        ),
-        loader: dashboardLoader,
-        children: [
-          {
-            index: true,
-            element: (
-              <Suspense fallback={<Loading />}>
-                <Dash />
-              </Suspense>
-            ),
-            loader: taskLoader,
-            action: addTask,
-          },
-          {
-            path: "dash",
-            element: (
-              <Suspense fallback={<Loading />}>
-                <Home />
-              </Suspense>
-            ),
-            loader: homeLoader,
-            action: addProject,
-          },
-          {
-            path: "progress-report",
-            element: (
-              <Suspense fallback={<Loading />}>
-                <ProgressReport />
-              </Suspense>
-            ),
-            loader: statsLoader,
-          },
-          {
-            path: "database",
-            element: (
-              <Suspense fallback={<Loading />}>
-                <Database />
-              </Suspense>
-            ),
-            action: addUserAction,
-            loader: databaseLoader,
-          },
-          { path: "delete-user/:id", action: deleteUserAction },
-          { path: "delete-project/:id", action: deleteProjectAction },
-          { path: "project-status/:id", action: updateProjectStatusAction },
-          { path: "delete-task/:id", action: deleteTaskPage },
-          {
-            path: "update-project/:id",
-            element: (
-              <Suspense fallback={<Loading />}>
-                <UpdateProjectPage />
-              </Suspense>
-            ),
-            loader: UpdateProjectPageLoader,
-            action: updateProjectPageAction,
-          },
-          {
-            path: "update-task/:id",
-            element: (
-              <Suspense fallback={<Loading />}>
-                <UpdateTaskPage />
-              </Suspense>
-            ),
-            loader: updateTaskPageLoader,
-            action: updateTaskPageAction,
-          },
-          // {
-          //   path: "pmhome",
-          //   element: <PMHome />,
-          //   loader: pmhomeLoader,
-          //   action: addPMProject,
-          // },
-        ],
-      },
-    ],
-  },
+const Router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <HomeLayout />
+        </Suspense>
+      ),
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <LoginPage />
+            </Suspense>
+          ),
+          loader: getAuth,
+          action: loginAction,
+        },
+        {
+          path: "register",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <RegisterPage />
+            </Suspense>
+          ),
+          action: registerAction,
+        },
+        {
+          path: "dashboard",
+          element: (
+            <Suspense fallback={<Loading />}>
+              <DashboardPage />
+            </Suspense>
+          ),
+          loader: dashboardLoader,
+          children: [
+            {
+              index: true,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <Dash />
+                </Suspense>
+              ),
+              loader: taskLoader,
+              action: addTask,
+            },
+            {
+              path: "dash",
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <Home />
+                </Suspense>
+              ),
+              loader: homeLoader,
+              action: addProject,
+            },
+            {
+              path: "progress-report",
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <ProgressReport />
+                </Suspense>
+              ),
+              loader: statsLoader,
+            },
+            {
+              path: "database",
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <Database />
+                </Suspense>
+              ),
+              action: addUserAction,
+              loader: databaseLoader,
+            },
+            { path: "delete-user/:id", action: deleteUserAction },
+            { path: "delete-project/:id", action: deleteProjectAction },
+            { path: "project-status/:id", action: updateProjectStatusAction },
+            { path: "delete-task/:id", action: deleteTaskPage },
+            {
+              path: "update-project/:id",
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <UpdateProjectPage />
+                </Suspense>
+              ),
+              loader: UpdateProjectPageLoader,
+              action: updateProjectPageAction,
+            },
+            {
+              path: "update-task/:id",
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <UpdateTaskPage />
+                </Suspense>
+              ),
+              loader: updateTaskPageLoader,
+              action: updateTaskPageAction,
+            },
+            // {
+            //   path: "pmhome",
+            //   element: <PMHome />,
+            //   loader: pmhomeLoader,
+            //   action: addPMProject,
+            // },
+          ],
+        },
+      ],
+    },
 
-  // {
-  //   path: "/about",
-  //   element: <LandingPage />,
-  // },
-  // {
-  //   path: "/about",
-  //   element: <LandingPage />,
-  // },
-  // {
-  //   path: "/about",
-  //   element: <LandingPage />,
-  // },
-  // {
-  //   path: "/about",
-  //   element: <LandingPage />,
-  // },
-  // {
-  //   path: "/about",
-  //   element: <LandingPage />,
-  // },
-  // {
-  //   path: "/about",
-  //   element: <LandingPage />,
-  // },
-]);
+    // {
+    //   path: "/about",
+    //   element: <LandingPage />,
+    // },
+    // {
+    //   path: "/about",
+    //   element: <LandingPage />,
+    // },
+    // {
+    //   path: "/about",
+    //   element: <LandingPage />,
+    // },
+    // {
+    //   path: "/about",
+    //   element: <LandingPage />,
+    // },
+    // {
+    //   path: "/about",
+    //   element: <LandingPage />,
+    // },
+    // {
+    //   path: "/about",
+    //   element: <LandingPage />,
+    // },
+  ],
+  {
+    basename: "/",
+  }
+);
 
 const App = () => {
   return <RouterProvider router={Router} />;
