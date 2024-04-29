@@ -204,6 +204,7 @@ const Dash = () => {
                       // defaultValue={"Ralph"}
                       placeholder={"Write anything..."}
                       //placeholder
+                      style={{height:'400px'}}
                     />
                       
                       
