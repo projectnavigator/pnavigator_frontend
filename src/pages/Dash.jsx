@@ -199,6 +199,7 @@ const Dash = () => {
                     />
                     <FormRow
                       type="text"
+                      className='text-start'
                       name="taskDescription"
                       labelText="Task Description"
                       // defaultValue={"Ralph"}
