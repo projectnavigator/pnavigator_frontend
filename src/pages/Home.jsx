@@ -268,7 +268,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <AllProjectContext.Provider value={{ projects, users, tasks1 }}>
+      <AllProjectContext.Provider value={{ projects, users, tasks1, currentuser }}>
         <ProjectContainer />
       </AllProjectContext.Provider>
     </>

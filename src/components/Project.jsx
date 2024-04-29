@@ -52,7 +52,7 @@ const Project = ({
   projectCompletion,
 }) => {
   const navigate = useNavigate();
-  const { users, tasks1 } = UseAllProjectContext();
+  const { users, tasks1, currentuser } = UseAllProjectContext();
   const starting = dayjs(plannedStart).format("MMM Do, YYYY");
   const ending = dayjs(plannedEnd).format("MMM Do, YYYY");
   const [showModal, setShowModal] = useState(false);
@@ -148,20 +148,20 @@ const Project = ({
     }
   };
 
-  console.log(projectStatus);
+  console.log(currentuser);
   return (
     <Wrapper>
       <header>
         <div
           className="main-icon"
-          onClick={projectEdit}
+          onClick={currentuser.user.isProjectManager?projectEdit:''}
           style={{ cursor: "pointer" }}
         >
           {projectName.charAt(0)}
         </div>
         <div className="info">
           <h5
-            onClick={projectEdit}
+            onClick={currentuser.user.isProjectManager?projectEdit:''}
             style={{
               cursor: "pointer",
               fontWeight: "bold",
@@ -227,7 +227,7 @@ const Project = ({
         )}
         <div
           className="content-center"
-          onClick={projectEdit}
+          onClick={currentuser.user.isProjectManager?projectEdit:''}
           style={{ cursor: "pointer" }}
         >
           <ProjectInfo
