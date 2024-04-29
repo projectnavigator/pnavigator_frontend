@@ -200,15 +200,14 @@ const Dash = () => {
                       defaultValue={TASK_STATUS.ON_TRACK}
                       list={Object.values(TASK_STATUS)}
                     />
-                    <div class="form-floating">
+                    <div className="form-floating">
                       <textarea
-                        class="form-control"
+                        className="form-control"
                         placeholder="Describe the task..."
                         id="floatingTextarea2"
-                        style="height: 100px"
-                        name="taskDescription"
+                        style={{ height: "100px" }}
                       ></textarea>
-                      <label for="floatingTextarea2">Comments</label>
+                      <label htmlFor="floatingTextarea2">Description</label>
                     </div>
 
                     <br />
