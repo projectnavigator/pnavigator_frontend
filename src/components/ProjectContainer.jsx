@@ -6,7 +6,7 @@ import Wrapper from "../assets/wrappers/ProjectContainer";
 const ProjectContainer = () => {
   const { projects } = UseAllProjectContext();
   const  project  = projects;
-  if (project.length === 0) {
+  if (project.projects.length === 0) {
     return (
       <Wrapper>
         <h2>No Projects to display...</h2>
@@ -16,7 +16,7 @@ const ProjectContainer = () => {
   return (
     <Wrapper>
       <div className="project">
-        {project.map((project) => {
+        {project.projects.map((project) => {
           return <Project key={project._id} {...project} />;
         })}
       </div>

@@ -48,7 +48,7 @@ const UpdateTaskPage = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const animatedComponents = makeAnimated();
-  const project = projects.find((project) =>
+  const project = projects.projects.find((project) =>
     tasks1.project.includes(project._id)
   );
   console.log(tasks1);

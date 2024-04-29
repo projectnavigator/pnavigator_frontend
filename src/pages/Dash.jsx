@@ -95,7 +95,7 @@ const Dash = () => {
     value: option._id,
     label: `${option.firstName} ${option.lastName}`,
   }));
-  const projectoptions = projects.map((option) => ({
+  const projectoptions = projects.projects.map((option) => ({
     value: option._id,
     label: `${option.projectName}`,
   }));
@@ -246,7 +246,7 @@ const Dash = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h1 className="modal-title fs-5" id="searchUser">
-                    Search User
+                  Filter Tasks
                   </h1>
                   <button
                     type="button"
@@ -258,7 +258,7 @@ const Dash = () => {
                 <div className="modal-body">
                   <Form method="get">
                     <div className="form-center">
-                      <FormRow type='search' name='search' defaultValue='a' />
+                      <FormRow type='search' name='search' />
                       <FormRowSelect labelText='task status' name='taskStatus' list={['all', ...Object.values(TASK_STATUS)]} defaultValue="='all" />
                       <FormRowSelect labelText='priority' name='priority' list={['all', ...Object.values(TASK_PRIORITY)]} defaultValue="='all" />
                       <FormRowSelect name='sort' defaultValue="newest" list={[...Object.values(TASK_SORT_BY)]} />

@@ -15,7 +15,7 @@ const Task = ({ _id, taskName, project, assignedUser, priority }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const projectid = projects.filter((p) => p._id === project[0])[0];
+  const projectid = projects.projects.filter((p) => p._id === project[0])[0];
 
   const assignedUsersWithNames = assignedUser.map((assignedUserId) => {
     const user = users.find((user) => user._id === assignedUserId);

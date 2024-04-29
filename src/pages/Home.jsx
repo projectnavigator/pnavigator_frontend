@@ -2,13 +2,14 @@ import { FormRow, FormRowSelect } from "../components";
 import { Form, useNavigation, redirect } from "react-router-dom";
 import userLoaderData from "./alluserdata";
 import customFetch from "../utils/customFetch";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { ProjectContainer } from "../components";
 import { useContext, createContext, useState } from "react";
 import { toast } from "react-toastify";
 import React from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import {PROJECT_STATUS,PROJECT_SORT_BY, PROJECT_COMPLETION} from "../utils/constants";
 
 const AllProjectContext = createContext();
 
@@ -38,10 +39,13 @@ export const action = async ({ request }) => {
   }
 };
 
-export const loader = async () => {
+export const loader = async ({request}) => {
+  console.log(request.url);
+  const params = Object.fromEntries([...new URL(request.url).searchParams.entries(),]);
+  console.log(params);
   try {
     const [projectResponse, usersResponse, tasksResponse,currentuserResponse] = await Promise.all([
-      customFetch.get("/project"),
+      customFetch.get("/project",{params}),
       customFetch.get("/user/all-user"),
       customFetch.get("/task"),
       customFetch.get("/user/current-user"),
@@ -51,6 +55,7 @@ export const loader = async () => {
     const { data: users } = usersResponse;
     const { data: tasks1 } = tasksResponse;
     const { data: currentuser } = currentuserResponse;
+
     return { projects, users, tasks1, currentuser };
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -219,7 +224,7 @@ const Home = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="searchUser">
-                  Search User
+                  Filter Project
                 </h1>
                 <button
                   type="button"
@@ -228,7 +233,37 @@ const Home = () => {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body"></div>
+              <div className="modal-body">
+              <Form method="get">
+                    <div className="form-center">
+                      <FormRow type='search' name='search' defaultValue='' />
+                      <FormRowSelect labelText='project status' name='projectStatus' list={['all', ...Object.values(PROJECT_STATUS)]} defaultValue="='all" />
+                      <FormRowSelect labelText='project completion' name='projectCompletion' list={['all', ...Object.values(PROJECT_COMPLETION)]} defaultValue="='all" />
+                      <FormRowSelect name='sort' defaultValue="newest" list={[...Object.values(PROJECT_SORT_BY)]} />
+
+                      {/* TEMPORARY */}
+
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          className="btn form-btn"
+                          data-bs-dismiss="modal"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? 'submitting' : 'submit'}
+                        </button>
+                        <Link to='/dashboard/dash' className="btn form-btn delete-btn">Reset Search Values</Link>
+                      </div>
+                    </div>
+                  </Form>
+              </div>
             </div>
           </div>
         </div>
