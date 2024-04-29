@@ -16,6 +16,7 @@ import {
   allTaskPage,
   UpdateProjectPage,
   UpdateTaskPage,
+  UpdateUserProfile,
   // PMHome,
   Home,
   ProgressReport,
@@ -42,6 +43,7 @@ import { loader as UpdateProjectPageLoader } from "./pages/updateProjectPage";
 import { action as updateProjectPageAction } from "./pages/updateProjectPage";
 import { loader as updateTaskPageLoader } from "./pages/UpdateTaskPage";
 import { action as updateTaskPageAction } from "./pages/UpdateTaskPage";
+import { loader as updateUserPageLoader } from "./pages/updateUserProfile";
 import Loading from "./components/Loading";
 
 const Router = createBrowserRouter(
@@ -144,6 +146,12 @@ const Router = createBrowserRouter(
               ),
               loader: updateTaskPageLoader,
               action: updateTaskPageAction,
+            },
+            {
+              path: "update-user/:id",
+              element: <UpdateUserProfile />,
+              loader: updateUserPageLoader,
+              // action: updateUserPageAction,
             },
             // {
             //   path: "pmhome",

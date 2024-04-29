@@ -74,8 +74,8 @@ const Task = ({ _id, taskName, project, assignedUser, priority, taskDescription 
         <div className="content">
           <div className="content-center">
             <p style={{ fontWeight: "bold" }}>Description:</p>
-            `${taskDescription}`
           </div>
+          <div style={{marginTop:'-20px'}} >{taskDescription}</div>
         </div>
       )}
     </Wrapper>

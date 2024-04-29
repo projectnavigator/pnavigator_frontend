@@ -4,10 +4,27 @@ import Wrapper from "../assets/wrappers/User";
 import UserInfo from "./userInfo";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import customFetch from "../utils/customFetch";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
 day.extend(advancedFormat);
 
 const Users = ({_id,firstName,lastName,isProjectManager,createdAt}) => {
   const date = day(createdAt).format("MMM Do, YYYY");
+  const [isArchived, setIsArchived] = useState(false);
+  const archiveUser = async () => {
+  try {
+    await customFetch.put(`/user/${_id}/archive`, { archive: true });
+    setIsArchived(true);
+    toast.success('User has been archived')
+    window.location.reload()
+  } catch (error) {
+    console.error(error);
+    // Handle the error
+  }
+};
+console.log(_id);
 
   return (
     <Wrapper>
@@ -29,6 +46,7 @@ const Users = ({_id,firstName,lastName,isProjectManager,createdAt}) => {
               Delete
             </button>
           </Form>
+          <button className="btn delete-btn" style={{marginLeft:'5px'}} onClick={archiveUser}>Archive</button>
         </footer>
       </div>
     </Wrapper>

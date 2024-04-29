@@ -206,6 +206,7 @@ const Dash = () => {
                         placeholder="Describe the task..."
                         id="floatingTextarea2"
                         style={{ height: "100px" }}
+                        name="taskDescription"
                       ></textarea>
                       <label htmlFor="floatingTextarea2">Description</label>
                     </div>

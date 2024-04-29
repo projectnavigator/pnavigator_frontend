@@ -20,6 +20,7 @@ const Dash = lazy(() => import("./Dash"));
 const Home = lazy(() => import("./Home"));
 const ProgressReport = lazy(() => import("./ProgressReport"));
 const Database = lazy(() => import("./Database"));
+const UpdateUserProfile = lazy(()=>import("./updateUserProfile"))
 // export {default as PMHome} from './PMHome';
 
 export {
@@ -37,6 +38,7 @@ export {
   StatusPage,
   UpdateProjectPage,
   UpdateTaskPage,
+  UpdateUserProfile,
   DashboardPage,
   ErrorPage,
   Dash,

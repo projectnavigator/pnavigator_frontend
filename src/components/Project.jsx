@@ -154,14 +154,14 @@ const Project = ({
       <header>
         <div
           className="main-icon"
-          onClick={currentuser.user.isProjectManager?projectEdit:''}
+          onClick={currentuser.isProjectManager?projectEdit:''}
           style={{ cursor: "pointer" }}
         >
           {projectName.charAt(0)}
         </div>
         <div className="info">
           <h5
-            onClick={currentuser.user.isProjectManager?projectEdit:''}
+            onClick={projectEdit}
             style={{
               cursor: "pointer",
               fontWeight: "bold",
@@ -227,7 +227,7 @@ const Project = ({
         )}
         <div
           className="content-center"
-          onClick={currentuser.user.isProjectManager?projectEdit:''}
+          onClick={projectEdit}
           style={{ cursor: "pointer" }}
         >
           <ProjectInfo
