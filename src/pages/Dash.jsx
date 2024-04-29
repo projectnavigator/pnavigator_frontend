@@ -197,6 +197,16 @@ const Dash = () => {
                       defaultValue={TASK_STATUS.ON_TRACK}
                       list={Object.values(TASK_STATUS)}
                     />
+                    <FormRow
+                      type="text"
+                      name="taskDescription"
+                      labelText="Task Description"
+                      // defaultValue={"Ralph"}
+                      placeholder={"Write anything..."}
+                      //placeholder
+                    />
+                      
+                      
                     <br />
 
                     <div className="modal-footer">

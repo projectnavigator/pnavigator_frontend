@@ -10,7 +10,7 @@ import { useAllTaskContext } from "../pages/Dash";
 
 day.extend(advancedFormat);
 
-const Task = ({ _id, taskName, project, assignedUser, priority }) => {
+const Task = ({ _id, taskName, project, assignedUser, priority, taskDescription }) => {
   const { projects, users, currentuser } = useAllTaskContext();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -74,8 +74,7 @@ const Task = ({ _id, taskName, project, assignedUser, priority }) => {
         <div className="content">
           <div className="content-center">
             <p style={{ fontWeight: "bold" }}>Description:</p>
-
-            {/* {user && <p>Assigned to: {user.firstName} {user.lastName}</p>} */}
+            `${taskDescription}`
           </div>
         </div>
       )}
