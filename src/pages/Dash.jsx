@@ -37,19 +37,22 @@ export const action = async ({ request }) => {
   }
 };
 
-export const loader = async ({request}) => {
+export const loader = async ({ request }) => {
   console.log(request.url);
-  const params = Object.fromEntries([...new URL(request.url).searchParams.entries(),]);
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
   console.log(params);
 
   // const customFetch = buildFetch(request);
   try {
-    const [taskResponse, userResponse, projectResponse,currentuserResponse] = await Promise.all([
-      customFetch.get("/task", {params}),
-      customFetch.get("/user/all-user"),
-      customFetch.get("/project"),
-      customFetch.get("/user/current-user"),
-    ]);
+    const [taskResponse, userResponse, projectResponse, currentuserResponse] =
+      await Promise.all([
+        customFetch.get("/task", { params }),
+        customFetch.get("/user/all-user"),
+        customFetch.get("/project"),
+        customFetch.get("/user/current-user"),
+      ]);
 
     const { data: tasks } = taskResponse;
     const { data: users } = userResponse;
@@ -197,18 +200,17 @@ const Dash = () => {
                       defaultValue={TASK_STATUS.ON_TRACK}
                       list={Object.values(TASK_STATUS)}
                     />
-                    <FormRow
-                      type="text"
-                      className='text-start'
-                      name="taskDescription"
-                      labelText="Task Description"
-                      // defaultValue={"Ralph"}
-                      placeholder={"Write anything..."}
-                      //placeholder
-                      style={{height:'400px'}}
-                    />
-                      
-                      
+                    <div class="form-floating">
+                      <textarea
+                        class="form-control"
+                        placeholder="Describe the task..."
+                        id="floatingTextarea2"
+                        style="height: 100px"
+                        name="taskDescription"
+                      ></textarea>
+                      <label for="floatingTextarea2">Comments</label>
+                    </div>
+
                     <br />
 
                     <div className="modal-footer">
@@ -237,74 +239,89 @@ const Dash = () => {
         {/* another button */}
 
         <button
-            type="button "
-            className="btn"
-            data-bs-toggle="modal"
-            data-bs-target="#searchUser"
-          >
-            Search Engine
-          </button>
+          type="button "
+          className="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#searchUser"
+        >
+          Search Engine
+        </button>
 
-          <div
-            className="modal fade"
-            id="searchUser"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabIndex="-1"
-            aria-labelledby="searchUserLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="searchUser">
+        <div
+          className="modal fade"
+          id="searchUser"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="searchUserLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="searchUser">
                   Filter Tasks
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <Form method="get">
-                    <div className="form-center">
-                      <FormRow type='search' name='search' />
-                      <FormRowSelect labelText='task status' name='taskStatus' list={['all', ...Object.values(TASK_STATUS)]} defaultValue="='all" />
-                      <FormRowSelect labelText='priority' name='priority' list={['all', ...Object.values(TASK_PRIORITY)]} defaultValue="='all" />
-                      <FormRowSelect name='sort' defaultValue="newest" list={[...Object.values(TASK_SORT_BY)]} />
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <Form method="get">
+                  <div className="form-center">
+                    <FormRow type="search" name="search" />
+                    <FormRowSelect
+                      labelText="task status"
+                      name="taskStatus"
+                      list={["all", ...Object.values(TASK_STATUS)]}
+                      defaultValue="='all"
+                    />
+                    <FormRowSelect
+                      labelText="priority"
+                      name="priority"
+                      list={["all", ...Object.values(TASK_PRIORITY)]}
+                      defaultValue="='all"
+                    />
+                    <FormRowSelect
+                      name="sort"
+                      defaultValue="newest"
+                      list={[...Object.values(TASK_SORT_BY)]}
+                    />
 
-                      {/* TEMPORARY */}
+                    {/* TEMPORARY */}
 
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button
-                          type="submit"
-                          className="btn form-btn"
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting ? 'submitting' : 'submit'}
-                        </button>
-                        <Link to='/dashboard' className="btn form-btn delete-btn">Reset Search Values</Link>
-                      </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="submit"
+                        className="btn form-btn"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "submitting" : "submit"}
+                      </button>
+                      <Link to="/dashboard" className="btn form-btn delete-btn">
+                        Reset Search Values
+                      </Link>
                     </div>
-                  </Form>
-                </div>
+                  </div>
+                </Form>
               </div>
             </div>
-
           </div>
         </div>
-        <AllTaskContext.Provider value={{ tasks, users, projects, currentuser }}>
-          <TaskContainer />
-        </AllTaskContext.Provider>
+      </div>
+      <AllTaskContext.Provider value={{ tasks, users, projects, currentuser }}>
+        <TaskContainer />
+      </AllTaskContext.Provider>
     </div>
   );
 };
