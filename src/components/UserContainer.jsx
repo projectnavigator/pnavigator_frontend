@@ -21,7 +21,7 @@ const UserContainer = () => {
     <Wrapper>
       
       <div className="user">
-        {user.user
+        {user
           .filter((user) => !user.archived)
           .map((user) => (
             <Users key={user._id} {...user} />
